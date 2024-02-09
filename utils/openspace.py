@@ -1,5 +1,5 @@
 import random
-from table import Table  
+from table import Table  #table class is defined in table.py
 import pandas as pd
 
 df=pd.read_csv('new_colleagues.csv')
@@ -12,42 +12,48 @@ Name_list = [item for sublist in data_list for item in sublist]
 print(Name_list)
 class Openspace:
     def __init__(self, number_of_tables,capacity):
+        # initialise openspace with the number of tables and capacity per table
         self.number_of_tables = number_of_tables
         # creates a new table with specified capcity
         self.tables = [Table(capacity) for _ in range(number_of_tables)]
 
     
-     # organize
+     # method to organize the seating arrangement
     def organize(self, names):
-        random.shuffle(names)
-        index = 0
-        for table in self.tables:
-            for seat in table.seats:
-                if index < len(names):
-                    seat.set_occupant(names[index])
-                    index += 1
-                else:
-                    break    
-        
+     # shuffle the list of names
+     random.shuffle(names)
+     all_seats = [(i, j) for i in range(len(self.tables)) for j in range(len(self.tables[0].seats))]
+     random.shuffle(all_seats)
+     # iterate through each table and seat and assign names
+     for (table_index, seat_index) in all_seats:
+        if not names:
+            break
+        table = self.tables[table_index]
+        seat = table.seats[seat_index]
+        seat.set_occupant(names.pop(0))
 
     def display(self):
+        # iterate through each table and seat,printing occupants
         for i, table in enumerate(self.tables, start=1):
             print(f"Table {i}:")
             for j, seat in enumerate(table.seats, start=1):
                 occupant = seat.occupant if not seat.free else "Empty"
                 print(f"Seat {j}: {occupant}")
             print()
-
+    # method to store the seating arrangement in an excel file
     def store(self, filename):
         # Create a list to store table data
         table_data = []
+        # iterate through each table and seat, collecting data
         for i, table in enumerate(self.tables, start=1):
             for j, seat in enumerate(table.seats, start=1):
                 if Name_list:
                   occupant = Name_list.pop(0)
                 else:
                   occupant = "Empty"
-                table_data.append({"Table": i, "Seat": f"Seat {j}", "Occupant": seat.occupant if seat.occupant else "Empty"})
+                # append table,seat and occupant information to the list
+                table_data.append({"Table": i, "Seat": f"Seat {j}", "Occupant": occupant if seat.occupant else "Empty"})
+            
         
         
         # Create a DataFrame from the table data
