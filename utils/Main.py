@@ -12,13 +12,7 @@ data_list=df.values.tolist()
 Name_list = [item for sublist in data_list for item in sublist]
 print(Name_list)
 
-def store(self, filename):
-        # Create a list to store table data
-        table_data = []
-        for i, table in enumerate(self.tables, start=0):
-            for j, seat in enumerate(table.seats, start=0):
-                table_data.append({"Table": i, "Seat": f"Seat {j}", "Occupant": seat.occupant if seat.occupant else "Empty"})
-        
+
 
 # Create a DataFrame from the table data
 df = pd.DataFrame(table_data)
