@@ -1,13 +1,3 @@
-import pandas as pd
-df=pd.read_csv('new_colleagues.csv')
-# prints the first five elements of the table
-print(df.head())
-# converts each element into the list
-data_list=df.values.tolist()
-print(data_list)
-# merge all the elements into one single list
-flat_list = [item for sublist in data_list for item in sublist]
-print(flat_list)
 # create a class seat with attributes free and occupant
 class Seat:    
 #create a constructor 
@@ -34,9 +24,7 @@ class Seat:
               return f"{occupant_name} has been removed"
          else:
               return "seat is empty"
-         
-# creating an instance of the seat class
-    seat=Seat()
+        
                 
 
 
