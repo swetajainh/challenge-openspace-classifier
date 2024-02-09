@@ -17,7 +17,7 @@ class Openspace:
         self.tables = [Table(capacity) for _ in range(number_of_tables)]
 
     
-     
+     # organize
     def organize(self, names):
         random.shuffle(names)
         index = 0
