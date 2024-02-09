@@ -67,7 +67,7 @@ if __name__ == "__main__":
     # Names of people to be assigned to seats
     names = Name_list
     # Create an Openspace with 6 tables
-    openspace = Openspace(4,6)
+    openspace = Openspace(6,4)
 
     # Organize the names into the Openspace
     openspace.organize(names)
